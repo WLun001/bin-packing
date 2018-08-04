@@ -5,27 +5,35 @@ public class Truck {
     private static final int LOAD_LIMIT = 10;
     private String id;
     private ArrayList<Box> boxes;
-    private int loadLimit;
+    private int load;
 
-    public Truck(){
+    public Truck() {
         this.id = UUID.randomUUID().toString();
-        loadLimit = LOAD_LIMIT;
+        load = 0;
         this.boxes = new ArrayList<>();
-    }
-
-    public String getId() {
-        return id;
     }
 
     public static int getLoadLimit() {
         return LOAD_LIMIT;
     }
 
+    public int getLoad() {
+        return load;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     public ArrayList<Box> getBoxes() {
         return boxes;
     }
 
-    public void addBox(Box box) {
-        boxes.add(box);
+    public boolean addBox(Box box) {
+        if (load < LOAD_LIMIT) {
+            boxes.add(box);
+            load += box.getWeight();
+            return true;
+        } else return false;
     }
 }

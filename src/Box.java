@@ -19,6 +19,6 @@ public class Box implements Comparable<Box> {
 
     @Override
     public int compareTo(Box o) {
-        return Double.compare(o.getWeight(), this.getWeight());
+        return Double.compare(this.getWeight(), o.getWeight());
     }
 }
