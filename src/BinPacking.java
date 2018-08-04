@@ -1,12 +1,18 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class BinPacking implements Operation {
     @Override
-    public Truck[] firstFitDecreasing(Box[] boxes, Truck[] trucks) {
+    public Truck[] firstFitDecreasing(Box[] boxes) {
         ArrayList<Box> listBox = new ArrayList<>(Arrays.asList(boxes));
+        Truck[] truckArr = new Truck[1000];
+        for (int i = 0; i < truckArr.length; i++)
+            truckArr[i] = new Truck();
+
+        ArrayList<Truck> trucks = new ArrayList<>(Arrays.asList(truckArr));
+
+        int currentTruck = 0;
         listBox.sort(new Comparator<Box>() {
             @Override
             public int compare(Box o1, Box o2) {
@@ -15,15 +21,17 @@ public class BinPacking implements Operation {
         });
 
         for (int i = 0; i < listBox.size(); i++) {
-
+            if (!trucks.get(currentTruck).addBox(listBox.get(i))) {
+                currentTruck++;
+                trucks.get(currentTruck).addBox(listBox.get(i));
+            }
         }
 
-
-        return new Truck[0];
+        return trucks.toArray(new Truck[0]);
     }
 
     @Override
-    public Truck[] bestFit(Box[] boxes, Truck[] trucks) {
+    public Truck[] bestFit(Box[] boxes) {
         return new Truck[0];
     }
 }

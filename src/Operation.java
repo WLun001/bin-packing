@@ -1,4 +1,4 @@
 public interface Operation {
-    Truck[] firstFitDecreasing(Box[] boxes, Truck[] trucks);
-    Truck[] bestFit(Box[] boxes, Truck[] trucks);
+    Truck[] firstFitDecreasing(Box[] boxes);
+    Truck[] bestFit(Box[] boxes);
 }

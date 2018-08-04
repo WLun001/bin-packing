@@ -1,29 +1,30 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class BinTester {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        int min = 1;
+        int max = 10;
+        Box[] boxes = new Box[1000];
+        for (int i = 0; i < boxes.length; i++)
+            boxes[i] = new Box((int) (Math.random() * ((max - min) + 1)) + min);
+//        boxes[0] = new Box(5);
+//        boxes[1] = new Box(5);
+//        boxes[2] = new Box(3);
 
-        Box[] boxes = new Box[10];
-        for (int i = 0; i < boxes.length; i++) {
-            boxes[i] = new Box(i);
+        BinPacking binPacking = new BinPacking();
+        Truck[] trucks = binPacking.firstFitDecreasing(boxes);
+
+        for (int i = 0; i < trucks.length; i++) {
+            if (trucks[i].getBoxes().size() > 0) {
+                System.out.println("Truck ID: " +  trucks[i].getId());
+                System.out.println("Boxes: " + trucks[i].getBoxes().size());
+                trucks[i].getBoxes().forEach(j -> System.out.println("Weight per box: " + j.getWeight()));
+                System.out.println("Truck current load: " + trucks[i].getCurrentLoad());
+            }
         }
 
-
-        ArrayList<Box> listBox = new ArrayList<>(Arrays.asList(boxes));
-        Collections.shuffle(listBox);
-        listBox.sort(new Comparator<Box>() {
-            @Override
-            public int compare(Box o1, Box o2) {
-                return Double.compare(o2.getWeight(), o1.getWeight());
-            }
-        });
-
-        for (int i = 0; i < listBox.size(); i++)
-            System.out.println(listBox.get(i).getWeight());
+        System.out.println("Total trucks used: " + Arrays.stream(trucks).filter(i -> i.getBoxes().size() > 0).count());
     }
+
 }

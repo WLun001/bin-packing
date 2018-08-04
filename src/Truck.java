@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Truck {
-    private static final int LOAD_LIMIT = 10;
+    private static final int LOAD_LIMIT = 50;
     private String id;
     private ArrayList<Box> boxes;
-    private int load;
+    private int currentLoad;
 
     public Truck() {
         this.id = UUID.randomUUID().toString();
-        load = 0;
+        currentLoad = 0;
         this.boxes = new ArrayList<>();
     }
 
@@ -17,8 +17,8 @@ public class Truck {
         return LOAD_LIMIT;
     }
 
-    public int getLoad() {
-        return load;
+    public int getCurrentLoad() {
+        return currentLoad;
     }
 
     public String getId() {
@@ -30,9 +30,9 @@ public class Truck {
     }
 
     public boolean addBox(Box box) {
-        if (load < LOAD_LIMIT) {
+        if (currentLoad + box.getWeight() <= LOAD_LIMIT) {
             boxes.add(box);
-            load += box.getWeight();
+            currentLoad += box.getWeight();
             return true;
         } else return false;
     }
