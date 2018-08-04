@@ -1,3 +1,5 @@
+package bin;
+
 import java.util.ArrayList;
 import java.util.UUID;
 

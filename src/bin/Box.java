@@ -1,3 +1,5 @@
+package bin;
+
 import java.util.UUID;
 
 public class Box implements Comparable<Box> {

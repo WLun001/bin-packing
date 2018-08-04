@@ -1,3 +1,5 @@
+package bin;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -33,7 +35,6 @@ public class BinPacking implements Operation {
             }
             System.out.println("after " + currentTruck + "");
         }
-
         return trucks.toArray(new Truck[0]);
     }
 
