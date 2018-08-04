@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Truck {
-    private static final int LOAD_LIMIT = 50;
+    private static final int LOAD_LIMIT = 10;
     private String id;
     private ArrayList<Box> boxes;
     private int currentLoad;

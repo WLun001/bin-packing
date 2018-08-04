@@ -5,12 +5,15 @@ public class BinTester {
     public static void main(String[] args) {
         int min = 1;
         int max = 10;
-        Box[] boxes = new Box[1000];
-        for (int i = 0; i < boxes.length; i++)
-            boxes[i] = new Box((int) (Math.random() * ((max - min) + 1)) + min);
-//        boxes[0] = new Box(5);
-//        boxes[1] = new Box(5);
-//        boxes[2] = new Box(3);
+        Box[] boxes = new Box[4];
+//        for (int i = 0; i < boxes.length; i++)
+//            boxes[i] = new Box((int) (Math.random() * ((max - min) + 1)) + min);
+        boxes[0] = new Box(10);
+        boxes[1] = new Box(10);
+        boxes[2] = new Box(5);
+        boxes[3] = new Box(10);
+
+
 
         BinPacking binPacking = new BinPacking();
         Truck[] trucks = binPacking.firstFitDecreasing(boxes);
