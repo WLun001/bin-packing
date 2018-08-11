@@ -19,7 +19,6 @@ public class Truck extends AbstractBin {
         return currentLoad;
     }
 
-
     public ArrayList<Parcel> getParcels() {
         return parcels;
     }
