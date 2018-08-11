@@ -76,6 +76,13 @@ public class TruckLoading extends AbstractBinPacking {
         return trucks.toArray(new Truck[0]);
     }
 
+    @Override
+    public Bin[] bestFitDecreasing(Object[] objects) {
+        ArrayList<Object> listParcels = new ArrayList<>(Arrays.asList(objects));
+        Collections.sort(listParcels, Collections.reverseOrder());
+        return bestFit(listParcels.toArray(new Object[0]));
+    }
+
     private void addExtraTrucks(ArrayList<Truck> trucks) {
         for (int i = 0; i < ADDITIONAL_BIN_AMOUNT; i++)
             trucks.add(new Truck());

@@ -7,4 +7,6 @@ public interface BinPackingOperation {
     Bin[] firstFitDecreasing(Object[] objects);
 
     Bin[] bestFit(Object[] objects);
+
+    Bin[] bestFitDecreasing(Object[] objects);
 }
