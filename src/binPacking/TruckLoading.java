@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import static binPacking.AbstractBinPacking.ADDITIONAL_BIN_AMOUNT;
-import static binPacking.AbstractBinPacking.OBJECT_INITIAL_AMOUNT;
-
-public class TruckLoading implements BinPackingOperation {
+public class TruckLoading extends AbstractBinPacking {
 
     @Override
     public Bin[] firstFitDecreasing(Object[] objects) {

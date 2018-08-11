@@ -20,8 +20,8 @@ public class TestTruckLoading {
         parcels[2] = new Parcel(5);
         parcels[3] = new Parcel(10);
 
-        TruckLoading truckLoading = new TruckLoading();
-        Bin[] trucks = truckLoading.firstFitDecreasing(parcels);
+        BinPacking truckLoading = new TruckLoading();
+        Bin[] trucks = ((TruckLoading)truckLoading).firstFitDecreasing(parcels);
 
         for (int i = 0; i < trucks.length; i++) {
             Truck truck = (Truck) trucks[i];
