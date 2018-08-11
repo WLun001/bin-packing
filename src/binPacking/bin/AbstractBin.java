@@ -3,7 +3,7 @@ package binPacking.bin;
 import java.util.UUID;
 
 public abstract class AbstractBin implements Bin {
-    protected static final int LOAD_LIMIT = 10;
+    public static final int LOAD_LIMIT = 10;
     protected String id;
 
     AbstractBin() {

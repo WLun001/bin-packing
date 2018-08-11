@@ -16,12 +16,12 @@ public class TestTruckLoading {
 //        for (int i = 0; i < parcels.length; i++)
 //            parcels[i] = new bin.object.Parcel((int) (Math.random() * ((max - min) + 1)) + min);
         parcels[0] = new Parcel(10);
-        parcels[1] = new Parcel(10);
-        parcels[2] = new Parcel(5);
-        parcels[3] = new Parcel(10);
+        parcels[1] = new Parcel(7);
+        parcels[2] = new Parcel(3);
+        parcels[3] = new Parcel(5);
 
         BinPacking truckLoading = new TruckLoading();
-        Bin[] trucks = ((TruckLoading)truckLoading).firstFitDecreasing(parcels);
+        Bin[] trucks = ((TruckLoading)truckLoading).bestFit(parcels);
 
         for (int i = 0; i < trucks.length; i++) {
             Truck truck = (Truck) trucks[i];
