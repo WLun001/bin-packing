@@ -5,28 +5,30 @@ import binPacking.bin.Truck;
 import binPacking.object.Object;
 import binPacking.object.Parcel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TestTruckLoading {
 
     public static void main(String[] args) {
         int min = 1;
         int max = 10;
-        Object[] parcels = new Parcel[5];
+        List<Object> parcels = new ArrayList<>();
 //        for (int i = 0; i < parcels.length; i++)
 //            parcels[i] = new Parcel((int) (Math.random() * ((max - min) + 1)) + min);
+        parcels.add(new Parcel(10));
+        parcels.add(new Parcel(7));
+        parcels.add(new Parcel(3));
+        parcels.add(new Parcel(5));
+        parcels.add(new Parcel(10));
 
-        parcels[0] = new Parcel(10);
-        parcels[1] = new Parcel(7);
-        parcels[2] = new Parcel(3);
-        parcels[3] = new Parcel(5);
-        parcels[4] = new Parcel(10);
 //        parcels[5] = new Parcel(7);
 //        parcels[6] = new Parcel(3);
 //        parcels[7] = new Parcel(5);
 //        parcels[8] = new Parcel(7);
 //        parcels[9] = new Parcel(3);
-    //    parcels[10] = new Parcel(3);
+        //    parcels[10] = new Parcel(3);
 //        parcels[11] = new Parcel(10);
 //        parcels[12] = new Parcel(7);
 //        parcels[13] = new Parcel(3);
@@ -70,7 +72,7 @@ public class TestTruckLoading {
 
         long startTime = System.currentTimeMillis();
         BinPacking truckLoading = new TruckLoading();
-        Bin[] trucks = ((TruckLoading)truckLoading).bestFitDecreasing(parcels);
+        Bin[] trucks = ((TruckLoading) truckLoading).bestFitDecreasing(parcels);
         long stopTime = System.currentTimeMillis();
         System.out.println(stopTime - startTime + "ms");
 
