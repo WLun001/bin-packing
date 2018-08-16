@@ -33,8 +33,7 @@ public class TruckLoading extends AbstractBinPacking {
     public Bin[] firstFitDecreasing(List<Object> objects) {
         ArrayList<Object> listParcels = new ArrayList<>(objects);
         listParcels.sort(Collections.reverseOrder());
-        listParcels.forEach(j -> System.out.println("Weight per box: " + ((Parcel) j).getWeight()));
-        return bestFit(listParcels);
+        return firstFit(listParcels);
 
     }
 
