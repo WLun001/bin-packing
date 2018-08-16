@@ -5,14 +5,16 @@ import binPacking.bin.Truck;
 import binPacking.object.Object;
 import binPacking.object.Parcel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static binPacking.bin.AbstractBin.LOAD_LIMIT;
 
 public class TruckLoading extends AbstractBinPacking {
+
+    @Override
+    public Bin[] firstFit(List<Object> objects) {
+        return new Bin[0];
+    }
 
     @Override
     public Bin[] firstFitDecreasing(List<Object> objects) {
@@ -42,7 +44,7 @@ public class TruckLoading extends AbstractBinPacking {
         ArrayList<Truck> trucks = new ArrayList<>();
         for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
             trucks.add(new Truck());
-        ArrayList<TruckPair> availableTrucks = new ArrayList<>();
+        HashMap<Integer, Integer> availableTrucks = new HashMap<>();
         int lastFullTruck;
 
         for (int j = 0; j < listParcels.size(); j++) {
@@ -56,15 +58,17 @@ public class TruckLoading extends AbstractBinPacking {
                     Truck truck = trucks.get(i);
                     int remainingLoad = LOAD_LIMIT - (truck.getCurrentLoad() + ((Parcel) parcel).getWeight());
                     if (remainingLoad >= 0)
-                        availableTrucks.add(new TruckPair(i, remainingLoad));
+                        availableTrucks.put(i, remainingLoad);
                 }
-                Collections.sort(availableTrucks);
+                Optional<Map.Entry<Integer, Integer>> min = availableTrucks
+                        .entrySet().stream().min(Map.Entry.comparingByValue());
 
-                if (availableTrucks.isEmpty()) {
+                if (min.isPresent()) {
+                    trucks.get(min.get().getKey()).addObject(parcel);
+                } else {
                     addExtraTrucks(trucks);
                     trucks.get(lastFullTruck).addObject(parcel);
-                } else
-                    trucks.get(availableTrucks.get(0).getIndex()).addObject(parcel);
+                }
             }
             availableTrucks.clear();
         }
