@@ -8,19 +8,18 @@ import binPacking.object.Parcel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static binPacking.bin.AbstractBin.LOAD_LIMIT;
 
 public class TruckLoading extends AbstractBinPacking {
 
     @Override
-    public Bin[] firstFitDecreasing(Object[] objects) {
-        ArrayList<Object> listParcels = new ArrayList<>(Arrays.asList(objects));
-        Truck[] truckArr = new Truck[BIN_INITIAL_AMOUNT];
-        for (int i = 0; i < truckArr.length; i++)
-            truckArr[i] = new Truck();
-
-        ArrayList<Truck> trucks = new ArrayList<>(Arrays.asList(truckArr));
+    public Bin[] firstFitDecreasing(List<Object> objects) {
+        ArrayList<Object> listParcels = new ArrayList<>(objects);
+        ArrayList<Truck> trucks = new ArrayList<>();
+        for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
+            trucks.add(new Truck());
 
         int currentTruck = 0;
         Collections.sort(listParcels, Collections.reverseOrder());
@@ -39,12 +38,12 @@ public class TruckLoading extends AbstractBinPacking {
     }
 
     @Override
-    public Bin[] bestFit(Object[] objects) {
-        ArrayList<Object> listParcels = new ArrayList<>(Arrays.asList(objects));
-        Truck[] truckArr = new Truck[BIN_INITIAL_AMOUNT];
-        for (int i = 0; i < truckArr.length; i++)
-            truckArr[i] = new Truck();
-        ArrayList<Truck> trucks = new ArrayList<>(Arrays.asList(truckArr));
+    public Bin[] bestFit(List<Object> objects) {
+        ArrayList<Object> listParcels = new ArrayList<>((objects));
+        ArrayList<Truck> trucks = new ArrayList<>();
+        for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
+            trucks.add(new Truck());
+
         ArrayList<TruckPair> availableTrucks = new ArrayList<>();
         int lastFullTruck;
 
@@ -77,10 +76,10 @@ public class TruckLoading extends AbstractBinPacking {
     }
 
     @Override
-    public Bin[] bestFitDecreasing(Object[] objects) {
-        ArrayList<Object> listParcels = new ArrayList<>(Arrays.asList(objects));
+    public Bin[] bestFitDecreasing(List<Object> objects) {
+        ArrayList<Object> listParcels = new ArrayList<>(objects);
         Collections.sort(listParcels, Collections.reverseOrder());
-        return bestFit(listParcels.toArray(new Object[0]));
+        return bestFit(listParcels);
     }
 
     private void addExtraTrucks(ArrayList<Truck> trucks) {
