@@ -14,31 +14,7 @@ public class TestTruckLoading {
     public static void main(String[] args) {
         BinPacking truckLoading = new TruckLoading();
         List<Object> parcels = new ArrayList<>();
-        // int min = 1;
-//        int max = 10;
-//        for (int i = 0; i < parcels.length; i++)
-//            parcels[i] = new Parcel((int) (Math.random() * ((max - min) + 1)) + min);
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(7));
-        parcels.add(new Parcel(3));
-        parcels.add(new Parcel(5));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(2));
-        parcels.add(new Parcel(7));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(9));
-        parcels.add(new Parcel(6));
-        parcels.add(new Parcel(3));
-        parcels.add(new Parcel(1));
-        parcels.add(new Parcel(8));
-        parcels.add(new Parcel(9));
-        parcels.add(new Parcel(8));
-        parcels.add(new Parcel(1));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(2));
-        parcels.add(new Parcel(4));
-        parcels.add(new Parcel(10));
-
+        initData(parcels);
         System.out.println("Number of parcels : " + parcels.size());
         displayMenu();
         int choice = getUserInput();
@@ -116,5 +92,38 @@ public class TestTruckLoading {
         }
         System.out.println("Total trucks used: " +
                 trucks.stream().filter(i -> ((Truck) i).getParcels().size() > 0).count());
+    }
+
+    private static void initData(List<Object> parcels) {
+        parcels.add(new Parcel(10));
+        parcels.add(new Parcel(7));
+        parcels.add(new Parcel(1));
+        parcels.add(new Parcel(5));
+        parcels.add(new Parcel(10));
+        parcels.add(new Parcel(2));
+        parcels.add(new Parcel(8));
+        parcels.add(new Parcel(10));
+        parcels.add(new Parcel(9));
+        parcels.add(new Parcel(6));
+        parcels.add(new Parcel(7));
+        parcels.add(new Parcel(8));
+        parcels.add(new Parcel(8));
+        parcels.add(new Parcel(9));
+        parcels.add(new Parcel(8));
+        parcels.add(new Parcel(2));
+        parcels.add(new Parcel(10));
+        parcels.add(new Parcel(2));
+        parcels.add(new Parcel(4));
+        parcels.add(new Parcel(10));
+        parcels.add(new Parcel(4));
+        parcels.add(new Parcel(2));
+        parcels.add(new Parcel(7));
+        parcels.add(new Parcel(9));
+        parcels.add(new Parcel(8));
+        parcels.add(new Parcel(4));
+        parcels.add(new Parcel(10));
+        parcels.add(new Parcel(2));
+        parcels.add(new Parcel(3));
+        parcels.add(new Parcel(10));
     }
 }
