@@ -5,7 +5,10 @@ import binPacking.bin.Truck;
 import binPacking.object.Object;
 import binPacking.object.Parcel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static binPacking.bin.AbstractBin.LOAD_LIMIT;
 
@@ -39,7 +42,7 @@ public class TruckLoading extends AbstractBinPacking {
         ArrayList<Truck> trucks = new ArrayList<>();
         for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
             trucks.add(new Truck());
-        HashMap<Integer, Integer> availableTrucks = new HashMap<>();
+        ArrayList<TruckPair> availableTrucks = new ArrayList<>();
         int lastFullTruck;
 
         for (int j = 0; j < listParcels.size(); j++) {
@@ -50,22 +53,18 @@ public class TruckLoading extends AbstractBinPacking {
                 trucks.get(j).addObject(parcel);
             else {
                 for (int i = 0; i < trucks.size(); i++) {
-
                     Truck truck = trucks.get(i);
                     int remainingLoad = LOAD_LIMIT - (truck.getCurrentLoad() + ((Parcel) parcel).getWeight());
-
                     if (remainingLoad >= 0)
-                        availableTrucks.put(i, remainingLoad);
+                        availableTrucks.add(new TruckPair(i, remainingLoad));
                 }
-                Optional<Map.Entry<Integer, Integer>> min = availableTrucks.entrySet()
-                        .stream().min(Map.Entry.comparingByValue());
+                Collections.sort(availableTrucks);
 
-                if (min.isPresent()) {
-                    trucks.get(min.get().getKey()).addObject(parcel);
-                } else {
+                if (availableTrucks.isEmpty()) {
                     addExtraTrucks(trucks);
                     trucks.get(lastFullTruck).addObject(parcel);
-                }
+                } else
+                    trucks.get(availableTrucks.get(0).getIndex()).addObject(parcel);
             }
             availableTrucks.clear();
         }
