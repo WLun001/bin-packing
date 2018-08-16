@@ -6,7 +6,6 @@ import binPacking.object.Object;
 import binPacking.object.Parcel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,13 +28,13 @@ public class TestTruckLoading {
         parcels.add(new Parcel(10));
         parcels.add(new Parcel(9));
         parcels.add(new Parcel(6));
-        parcels.add(new Parcel(5));
+        parcels.add(new Parcel(3));
         parcels.add(new Parcel(1));
         parcels.add(new Parcel(8));
         parcels.add(new Parcel(9));
-        parcels.add(new Parcel(3));
+        parcels.add(new Parcel(8));
         parcels.add(new Parcel(1));
-        parcels.add(new Parcel(4));
+        parcels.add(new Parcel(10));
         parcels.add(new Parcel(2));
         parcels.add(new Parcel(4));
         parcels.add(new Parcel(10));
@@ -46,7 +45,7 @@ public class TestTruckLoading {
         switch (choice) {
             case 1: {
                 long startTime = System.currentTimeMillis();
-                Bin[] trucks = ((TruckLoading) truckLoading).firstFit(parcels);
+                List<Bin> trucks = truckLoading.firstFit(parcels);
                 long stopTime = System.currentTimeMillis();
                 printParcels(trucks);
                 System.out.println("Time taken: " + (stopTime - startTime) + "ms");
@@ -55,7 +54,7 @@ public class TestTruckLoading {
 
             case 2: {
                 long startTime = System.currentTimeMillis();
-                Bin[] trucks = ((TruckLoading) truckLoading).firstFitDecreasing(parcels);
+                List<Bin> trucks = truckLoading.firstFitDecreasing(parcels);
                 long stopTime = System.currentTimeMillis();
                 printParcels(trucks);
                 System.out.println("Time taken: " + (stopTime - startTime) + "ms");
@@ -64,7 +63,7 @@ public class TestTruckLoading {
 
             case 3: {
                 long startTime = System.currentTimeMillis();
-                Bin[] trucks = ((TruckLoading) truckLoading).bestFit(parcels);
+                List<Bin> trucks = truckLoading.bestFit(parcels);
                 long stopTime = System.currentTimeMillis();
                 printParcels(trucks);
                 System.out.println("Time taken: " + (stopTime - startTime) + "ms");
@@ -73,7 +72,7 @@ public class TestTruckLoading {
 
             case 4: {
                 long startTime = System.currentTimeMillis();
-                Bin[] trucks = ((TruckLoading) truckLoading).bestFitDecreasing(parcels);
+                List<Bin> trucks = truckLoading.bestFitDecreasing(parcels);
                 long stopTime = System.currentTimeMillis();
                 printParcels(trucks);
                 System.out.println("Time taken: " + (stopTime - startTime) + "ms");
@@ -104,7 +103,7 @@ public class TestTruckLoading {
         return choice;
     }
 
-    private static void printParcels(Bin[] trucks) {
+    private static void printParcels(List<Bin> trucks) {
         for (Bin truck1 : trucks) {
             Truck truck = (Truck) truck1;
             if (truck.getParcels().size() > 0) {
@@ -115,7 +114,7 @@ public class TestTruckLoading {
                 System.out.println();
             }
         }
-        System.out.println("Total trucks used: " + Arrays.stream(trucks)
-                .filter(i -> ((Truck) i).getParcels().size() > 0).count());
+        System.out.println("Total trucks used: " +
+                trucks.stream().filter(i -> ((Truck) i).getParcels().size() > 0).count());
     }
 }

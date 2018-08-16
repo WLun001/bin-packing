@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface BinPackingOperation {
 
-    Bin[] firstFit(List<Object> objects);
+    List<Bin> firstFit(List<Object> objects);
 
-    Bin[] firstFitDecreasing(List<Object> objects);
+    List<Bin> firstFitDecreasing(List<Object> objects);
 
-    Bin[] bestFit(List<Object> objects);
+    List<Bin> bestFit(List<Object> objects);
 
-    Bin[] bestFitDecreasing(List<Object> objects);
+    List<Bin> bestFitDecreasing(List<Object> objects);
 }

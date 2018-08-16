@@ -12,8 +12,8 @@ import static binPacking.bin.AbstractBin.LOAD_LIMIT;
 public class TruckLoading extends AbstractBinPacking {
 
     @Override
-    public Bin[] firstFit(List<Object> objects) {
-        ArrayList<Truck> trucks = new ArrayList<>();
+    public List<Bin> firstFit(List<Object> objects) {
+        ArrayList<Bin> trucks = new ArrayList<>();
         for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
             trucks.add(new Truck());
         int currentTruck = 0;
@@ -26,21 +26,20 @@ public class TruckLoading extends AbstractBinPacking {
                 trucks.get(currentTruck).addObject(objects.get(i));
             }
         }
-        return trucks.toArray(new Truck[0]);
+        return trucks;
     }
 
     @Override
-    public Bin[] firstFitDecreasing(List<Object> objects) {
+    public List<Bin> firstFitDecreasing(List<Object> objects) {
         ArrayList<Object> listParcels = new ArrayList<>(objects);
         listParcels.sort(Collections.reverseOrder());
         return firstFit(listParcels);
-
     }
 
     @Override
-    public Bin[] bestFit(List<Object> objects) {
+    public List<Bin> bestFit(List<Object> objects) {
         ArrayList<Object> listParcels = new ArrayList<>((objects));
-        ArrayList<Truck> trucks = new ArrayList<>();
+        ArrayList<Bin> trucks = new ArrayList<>();
         for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
             trucks.add(new Truck());
         HashMap<Integer, Integer> availableTrucks = new HashMap<>();
@@ -54,7 +53,7 @@ public class TruckLoading extends AbstractBinPacking {
                 trucks.get(j).addObject(parcel);
             else {
                 for (int i = 0; i < trucks.size(); i++) {
-                    Truck truck = trucks.get(i);
+                    Truck truck = (Truck) trucks.get(i);
                     int remainingLoad = LOAD_LIMIT - (truck.getCurrentLoad() + ((Parcel) parcel).getWeight());
                     if (remainingLoad >= 0)
                         availableTrucks.put(i, remainingLoad);
@@ -71,17 +70,18 @@ public class TruckLoading extends AbstractBinPacking {
             }
             availableTrucks.clear();
         }
-        return trucks.toArray(new Truck[0]);
+        trucks.trimToSize();
+        return trucks;
     }
 
     @Override
-    public Bin[] bestFitDecreasing(List<Object> objects) {
+    public List<Bin> bestFitDecreasing(List<Object> objects) {
         ArrayList<Object> listParcels = new ArrayList<>(objects);
         listParcels.sort(Collections.reverseOrder());
         return bestFit(listParcels);
     }
 
-    private void addExtraTrucks(ArrayList<Truck> trucks) {
+    private void addExtraTrucks(List<Bin> trucks) {
         for (int i = 0; i < ADDITIONAL_BIN_AMOUNT; i++)
             trucks.add(new Truck());
     }
