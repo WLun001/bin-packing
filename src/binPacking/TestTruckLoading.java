@@ -14,50 +14,56 @@ public class TestTruckLoading {
     public static void main(String[] args) {
         BinPacking truckLoading = new TruckLoading();
         List<Object> parcels = new ArrayList<>();
+        int choice;
         initData(parcels);
-        System.out.println("Number of parcels : " + parcels.size());
-        displayMenu();
-        int choice = getUserInput();
-        switch (choice) {
-            case 1: {
-                long startTime = System.currentTimeMillis();
-                List<Bin> trucks = truckLoading.firstFit(parcels);
-                long stopTime = System.currentTimeMillis();
-                printParcels(trucks);
-                System.out.println("Time taken: " + (stopTime - startTime) + "ms");
-            }
-            break;
 
-            case 2: {
-                long startTime = System.currentTimeMillis();
-                List<Bin> trucks = truckLoading.firstFitDecreasing(parcels);
-                long stopTime = System.currentTimeMillis();
-                printParcels(trucks);
-                System.out.println("Time taken: " + (stopTime - startTime) + "ms");
-            }
-            break;
-
-            case 3: {
-                long startTime = System.currentTimeMillis();
-                List<Bin> trucks = truckLoading.bestFit(parcels);
-                long stopTime = System.currentTimeMillis();
-                printParcels(trucks);
-                System.out.println("Time taken: " + (stopTime - startTime) + "ms");
-            }
-            break;
-
-            case 4: {
-                long startTime = System.currentTimeMillis();
-                List<Bin> trucks = truckLoading.bestFitDecreasing(parcels);
-                long stopTime = System.currentTimeMillis();
-                printParcels(trucks);
-                System.out.println("Time taken: " + (stopTime - startTime) + "ms");
-            }
-            break;
-            default:
-                System.out.println("\nPlease choose between 1-4");
+        do {
+            System.out.println("Number of parcels : " + parcels.size());
+            displayMenu();
+            choice = getUserInput();
+            switch (choice) {
+                case 1: {
+                    long startTime = System.currentTimeMillis();
+                    List<Bin> trucks = truckLoading.firstFit(parcels);
+                    long stopTime = System.currentTimeMillis();
+                    printParcels(trucks);
+                    System.out.println("Time taken: " + (stopTime - startTime) + "ms\n");
+                }
                 break;
-        }
+
+                case 2: {
+                    long startTime = System.currentTimeMillis();
+                    List<Bin> trucks = truckLoading.firstFitDecreasing(parcels);
+                    long stopTime = System.currentTimeMillis();
+                    printParcels(trucks);
+                    System.out.println("Time taken: " + (stopTime - startTime) + "ms\n");
+                }
+                break;
+
+                case 3: {
+                    long startTime = System.currentTimeMillis();
+                    List<Bin> trucks = truckLoading.bestFit(parcels);
+                    long stopTime = System.currentTimeMillis();
+                    printParcels(trucks);
+                    System.out.println("Time taken: " + (stopTime - startTime) + "ms\n");
+                }
+                break;
+
+                case 4: {
+                    long startTime = System.currentTimeMillis();
+                    List<Bin> trucks = truckLoading.bestFitDecreasing(parcels);
+                    long stopTime = System.currentTimeMillis();
+                    printParcels(trucks);
+                    System.out.println("Time taken: " + (stopTime - startTime) + "ms\n");
+                }
+                break;
+                default: {
+                    if (choice != 5)
+                        System.out.println("\nPlease choose between 1-4\n");
+                }
+                break;
+            }
+        } while (choice != 5);
     }
 
     private static void displayMenu() {
@@ -66,6 +72,7 @@ public class TestTruckLoading {
         System.out.println("2 - First Fit Decreasing");
         System.out.println("3 - Best Fit");
         System.out.println("4 - Best Fit Decreasing");
+        System.out.println("5 - Exit");
     }
 
     private static int getUserInput() {
