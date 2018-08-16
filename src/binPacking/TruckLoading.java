@@ -13,29 +13,29 @@ public class TruckLoading extends AbstractBinPacking {
 
     @Override
     public Bin[] firstFit(List<Object> objects) {
-        return new Bin[0];
+        ArrayList<Truck> trucks = new ArrayList<>();
+        for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
+            trucks.add(new Truck());
+        int currentTruck = 0;
+
+        for (int i = 0; i < objects.size(); i++) {
+            if (!trucks.get(currentTruck).addObject(objects.get(i))) {
+                currentTruck++;
+                if (currentTruck > BIN_INITIAL_AMOUNT - 1)
+                    addExtraTrucks(trucks);
+                trucks.get(currentTruck).addObject(objects.get(i));
+            }
+        }
+        return trucks.toArray(new Truck[0]);
     }
 
     @Override
     public Bin[] firstFitDecreasing(List<Object> objects) {
         ArrayList<Object> listParcels = new ArrayList<>(objects);
-        ArrayList<Truck> trucks = new ArrayList<>();
-        for (int i = 0; i < BIN_INITIAL_AMOUNT; i++)
-            trucks.add(new Truck());
-        int currentTruck = 0;
         listParcels.sort(Collections.reverseOrder());
+        listParcels.forEach(j -> System.out.println("Weight per box: " + ((Parcel) j).getWeight()));
+        return bestFit(listParcels);
 
-        for (int i = 0; i < listParcels.size(); i++) {
-            System.out.println("before " + currentTruck + "");
-            if (!trucks.get(currentTruck).addObject(listParcels.get(i))) {
-                currentTruck++;
-                if (currentTruck > BIN_INITIAL_AMOUNT - 1)
-                    addExtraTrucks(trucks);
-                trucks.get(currentTruck).addObject(listParcels.get(i));
-            }
-            System.out.println("after " + currentTruck + "");
-        }
-        return trucks.toArray(new Truck[0]);
     }
 
     @Override
@@ -85,6 +85,5 @@ public class TruckLoading extends AbstractBinPacking {
     private void addExtraTrucks(ArrayList<Truck> trucks) {
         for (int i = 0; i < ADDITIONAL_BIN_AMOUNT; i++)
             trucks.add(new Truck());
-        System.out.println(trucks.size() + "");
     }
 }

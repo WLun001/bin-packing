@@ -22,6 +22,8 @@ public class TestTruckLoading {
         parcels.add(new Parcel(3));
         parcels.add(new Parcel(5));
         parcels.add(new Parcel(10));
+        parcels.add(new Parcel(2));
+
 
 //        parcels[5] = new Parcel(7);
 //        parcels[6] = new Parcel(3);
@@ -72,7 +74,7 @@ public class TestTruckLoading {
 
         long startTime = System.currentTimeMillis();
         BinPacking truckLoading = new TruckLoading();
-        Bin[] trucks = ((TruckLoading) truckLoading).bestFitDecreasing(parcels);
+        Bin[] trucks = ((TruckLoading) truckLoading).firstFitDecreasing(parcels);
         long stopTime = System.currentTimeMillis();
         System.out.println(stopTime - startTime + "ms");
 
