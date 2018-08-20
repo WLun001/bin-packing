@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static binPacking.bin.AbstractBin.LOAD_LIMIT;
+
 public class TestTruckLoading {
 
     public static void main(String[] args) {
@@ -18,7 +20,7 @@ public class TestTruckLoading {
         initData(parcels);
 
         do {
-            System.out.println("Number of parcels : " + parcels.size());
+            System.out.println("Number of parcels in stock : " + parcels.size());
             displayMenu();
             choice = getUserInput();
             switch (choice) {
@@ -90,10 +92,12 @@ public class TestTruckLoading {
         for (Bin truck1 : trucks) {
             Truck truck = (Truck) truck1;
             if (truck.getParcels().size() > 0) {
+                ArrayList<Parcel> parcels = truck.getParcels();
                 System.out.println("Truck ID: " + truck.getId());
-                System.out.println("Boxes used:  " + truck.getParcels().size());
-                truck.getParcels().forEach(j -> System.out.println("Weight per box: " + j.getWeight()));
+                System.out.println("Parcels inserted:  " + parcels.size());
+                parcels.forEach(j -> System.out.println("Weight per parcel: " + j.getWeight()));
                 System.out.println("Truck current load: " + truck.getCurrentLoad());
+                System.out.println("Truck Maximum Load: " + LOAD_LIMIT);
                 System.out.println();
             }
         }
