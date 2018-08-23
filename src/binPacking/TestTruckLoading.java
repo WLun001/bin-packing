@@ -21,6 +21,7 @@ public class TestTruckLoading {
 
         do {
             System.out.println("Number of parcels in stock : " + parcels.size());
+            System.out.println("Truck Maximum Load: " + LOAD_LIMIT);
             displayMenu();
             choice = getUserInput();
             switch (choice) {
@@ -89,6 +90,7 @@ public class TestTruckLoading {
     }
 
     private static void printParcels(List<Bin> trucks) {
+        float ultilisation = 0f;
         for (Bin truck1 : trucks) {
             Truck truck = (Truck) truck1;
             if (truck.getParcels().size() > 0) {
@@ -97,12 +99,14 @@ public class TestTruckLoading {
                 System.out.println("Parcels inserted:  " + parcels.size());
                 parcels.forEach(j -> System.out.println("Weight per parcel: " + j.getWeight()));
                 System.out.println("Truck current load: " + truck.getCurrentLoad());
-                System.out.println("Truck Maximum Load: " + LOAD_LIMIT);
+                System.out.println("Truck utilisation: " + truck.getTruckUltilisation() * 100 + "%");
+                ultilisation += truck.getTruckUltilisation();
                 System.out.println();
             }
         }
         System.out.println("Total trucks used: " +
                 trucks.stream().filter(i -> ((Truck) i).getParcels().size() > 0).count());
+        System.out.println("Overall truck utilisation: " + ultilisation / trucks.size() * 100 + "%");
     }
 
     private static void initData(List<Object> parcels) {
@@ -110,31 +114,31 @@ public class TestTruckLoading {
         parcels.add(new Parcel(7));
         parcels.add(new Parcel(1));
         parcels.add(new Parcel(5));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(2));
-        parcels.add(new Parcel(8));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(9));
-        parcels.add(new Parcel(6));
-        parcels.add(new Parcel(7));
-        parcels.add(new Parcel(8));
-        parcels.add(new Parcel(8));
-        parcels.add(new Parcel(9));
-        parcels.add(new Parcel(8));
-        parcels.add(new Parcel(2));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(2));
-        parcels.add(new Parcel(4));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(4));
-        parcels.add(new Parcel(2));
-        parcels.add(new Parcel(7));
-        parcels.add(new Parcel(9));
-        parcels.add(new Parcel(8));
-        parcels.add(new Parcel(4));
-        parcels.add(new Parcel(10));
-        parcels.add(new Parcel(2));
-        parcels.add(new Parcel(3));
-        parcels.add(new Parcel(10));
+//        parcels.add(new Parcel(10));
+//        parcels.add(new Parcel(2));
+//        parcels.add(new Parcel(8));
+//        parcels.add(new Parcel(10));
+//        parcels.add(new Parcel(9));
+//        parcels.add(new Parcel(6));
+//        parcels.add(new Parcel(7));
+//        parcels.add(new Parcel(8));
+//        parcels.add(new Parcel(8));
+//        parcels.add(new Parcel(9));
+//        parcels.add(new Parcel(8));
+//        parcels.add(new Parcel(2));
+//        parcels.add(new Parcel(10));
+//        parcels.add(new Parcel(2));
+//        parcels.add(new Parcel(4));
+//        parcels.add(new Parcel(10));
+//        parcels.add(new Parcel(4));
+//        parcels.add(new Parcel(2));
+//        parcels.add(new Parcel(7));
+//        parcels.add(new Parcel(9));
+//        parcels.add(new Parcel(8));
+//        parcels.add(new Parcel(4));
+//        parcels.add(new Parcel(10));
+//        parcels.add(new Parcel(2));
+//        parcels.add(new Parcel(3));
+//        parcels.add(new Parcel(10));
     }
 }

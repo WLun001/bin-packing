@@ -25,10 +25,14 @@ public class Truck extends AbstractBin {
 
     public boolean addObject(Object object) {
         Parcel parcel = (Parcel) object;
-        if (currentLoad + parcel.getWeight() <= LOAD_LIMIT) {
+        if (currentLoad + parcel.getWeight() <= getLoadLimit()) {
             parcels.add(parcel);
             currentLoad += parcel.getWeight();
             return true;
         } else return false;
+    }
+
+    public float getTruckUltilisation() {
+        return (float) currentLoad / getLoadLimit();
     }
 }
