@@ -58,6 +58,7 @@ public class TruckLoading extends AbstractBinPacking {
                     if (remainingLoad >= 0)
                         availableTrucks.put(i, remainingLoad);
                 }
+                // get min value from the availableTrucks
                 Optional<Map.Entry<Integer, Integer>> min = availableTrucks
                         .entrySet().stream().min(Map.Entry.comparingByValue());
 
